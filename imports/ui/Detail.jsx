@@ -12,19 +12,35 @@ export default class Detail extends Component {
   }
 
   render() {
-    console.log(this.props.detail.name, Session.get("currentName"));
-    console.log(this.props.detail.name == Session.get("currentName")?"false":"true");
     const detailClassName = this.props.detail.checked ? 'checked' : '';
-    return (
-      <li className={detailClassName}>
-        <input
-            type="checkbox"
-            checked={this.props.detail.checked}
-            onClick={this.toggleChecked.bind(this)}
-          />
-        <span className="text">day:{this.props.detail.day} hour:{this.props.detail.hour}:00</span>
-      </li>
-    );
+
+    if (this.props.detail.name == Session.get("currentName")) { //only modify own schedule
+      return (
+        <li className={detailClassName}>
+          <input
+              type="checkbox"
+              readOnly
+              checked={this.props.detail.checked}
+              onClick={this.toggleChecked.bind(this)}
+            />
+          <span className="text">day:{this.props.detail.day} hour:{this.props.detail.hour}:00</span>
+        </li>
+      );
+    } else {
+      return (
+        <li className={detailClassName}>
+          <input
+              type="checkbox"
+              readOnly
+              checked={this.props.detail.checked}
+              onClick={this.toggleChecked.bind(this)}
+              disabled="true"
+            />
+          <span className="text">day:{this.props.detail.day} hour:{this.props.detail.hour}:00</span>
+        </li>
+      );
+    }
+    
   }
 }
  
