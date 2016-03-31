@@ -4,6 +4,10 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Users } from '../api/users.js';
 import User from './User.jsx';
+
+import { Details } from '../api/details.js';
+
+import { Session } from 'meteor/session'
  
 // App component - represents the whole app
 export default class App extends Component {
@@ -13,6 +17,8 @@ export default class App extends Component {
 
     const name = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
+    Session.set("currentName", name);
+
     if(Users.findOne({name: name})){
 
     } else {
@@ -20,6 +26,15 @@ export default class App extends Component {
         name,
         createdAt: new Date(), // current time
       });
+
+      for (var day = 1; day < 8; day++) {
+        // console.log('nsun, day', day);
+        for (var hour = 1; hour < 25; hour++) {
+          //insert hour
+          Details.insert({name, day, hour, checked: false, createAt:new Date()});
+          // console.log('nsun hour', hour);
+        }
+      }
     }
 
     // Clear form
@@ -32,10 +47,6 @@ export default class App extends Component {
     ));
   }
 
-  // configureScene(route){
-  //   return Navigator.SceneConfigs.FloatFromRight;
-  // },
-
   render() {
     return (
       <div className="container">
@@ -46,6 +57,7 @@ export default class App extends Component {
               type="text"
               ref="textInput"
               placeholder="Enter your name"
+              defaultValue={Session.get("currentName")}
             />
           </form>
         </header>
