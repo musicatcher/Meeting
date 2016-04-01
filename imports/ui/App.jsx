@@ -8,7 +8,12 @@ import User from './User.jsx';
 import { Details } from '../api/details.js';
 
 import { Session } from 'meteor/session'
- 
+
+import Schedule from './Schedule.jsx';
+
+import { render } from 'react-dom';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+
 // App component - represents the whole app
 export default class App extends Component {
 
@@ -47,6 +52,17 @@ export default class App extends Component {
     ));
   }
 
+  showSchedule() {
+    //set empty
+    render(<div />, document.getElementById('render-target'));
+    //show schedule
+    BlazeLayout.render('Schedule_template');
+  }
+
+  showMeeting() {
+
+  }
+
   render() {
     return (
       <div className="container">
@@ -60,6 +76,12 @@ export default class App extends Component {
               defaultValue={Session.get("currentName")}
             />
           </form>
+          <button onClick={this.showSchedule.bind(this)}>
+            Schedule
+          </button>
+          <button onClick={this.showMeeting.bind(this)}>
+            Meeting
+          </button>
         </header>
  
         <ul>

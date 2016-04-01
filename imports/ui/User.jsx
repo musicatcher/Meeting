@@ -20,7 +20,7 @@ export default class User extends Component {
     const userClassName = this.props.user.checked ? 'checked' : '';
     return (
       <li className={userClassName}>
-        <button className="userDetail" onClick={this.showUserDetail.bind(this)}>
+        <button onClick={this.showUserDetail.bind(this)}>
           Detail
         </button>
 

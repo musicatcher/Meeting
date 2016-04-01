@@ -1,0 +1,17 @@
+<template name="Schedule_template">
+	<div className="container" id="render-target">
+		<header>
+          	<h1>Schedule</h1>
+          	<button name="back">Back</button>
+        </header>
+		
+		<p>You've pressed the button {{counter}} times.</p>
+		<div class="content-scrollable">
+			<ul>
+		    	{{#each schedule in schedules}}
+		          {{> Schedule_item (scheduleArgs schedule)}}
+		        {{/each}}
+	        </ul>>
+	    </div>
+	</div>>
+</template>
