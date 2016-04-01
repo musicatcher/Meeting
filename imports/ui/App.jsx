@@ -10,6 +10,7 @@ import { Details } from '../api/details.js';
 import { Session } from 'meteor/session'
 
 import Schedule from './Schedule.jsx';
+import Meeting from './Meeting.jsx';
 
 import { render } from 'react-dom';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
@@ -60,7 +61,10 @@ export default class App extends Component {
   }
 
   showMeeting() {
-
+    //set empty
+    render(<div />, document.getElementById('render-target'));
+    //show schedule
+    BlazeLayout.render('Meeting_template');
   }
 
   render() {

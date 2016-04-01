@@ -1,13 +1,13 @@
-<template name="Schedule_template">
+<template name="Meeting_template">
 	<div className="container" id="render-target">
 		<header>
-          	<h1>Schedule</h1>
+          	<h1>Meeting</h1>
           	<button name="back">Back</button>
         </header>
 		<div class="content-scrollable">
 			<ul>
-		    	{{#each schedule in schedules}}
-		          {{> Schedule_item (scheduleArgs schedule)}}
+		    	{{#each meeting in meetings}}
+		          {{> Meeting_item (meetingArgs meeting)}}
 		        {{/each}}
 	        </ul>>
 	    </div>
