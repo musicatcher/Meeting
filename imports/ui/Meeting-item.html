@@ -1,6 +1,6 @@
 <template name="Meeting_item">
-  <li>
-    <div>
+  <li class={{itemStatus meeting}}>
+    <div >
       <p>status:{{status meeting}} {{meeting.text}} Accepted users: {{meeting.acceptedUsers}}</p>
       {{#if accepted meeting}}
       	<button name='cancel'>Cancel</button>

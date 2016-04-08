@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import './Meeting-item.html';
 import { Session } from 'meteor/session'
 import { Meetings } from '../api/meetings.js';
+import { Details } from '../api/details.js';
 
 Template.Meeting_item.onCreated(function meetingItemOnCreated() {
 
@@ -13,6 +14,14 @@ Template.Meeting_item.helpers({
 		if (meeting.acceptedUsers.length == meeting.participant.length) {
 			result = 'booked';
 		}
+		return result;
+	},
+	itemStatus(meeting){
+		var result = 'meeting-item-tentative';
+		if (meeting.acceptedUsers.length == meeting.participant.length) {
+			result = 'meeting-item-booked';
+		}
+		console.log("itemStatus", result);
 		return result;
 	},
 	accepted(meeting){
@@ -40,6 +49,12 @@ Template.Meeting_item.events({
 		var meetingData = instance.data.meeting;
 		meetingData.acceptedUsers.splice(meetingData.acceptedUsers.length - 1, 0, Session.get('currentName'));
 		Meetings.update(instance.data.meeting._id, meetingData);
+
+		var name = Session.get('currentName');
+		var result = Details.findOne({name, day:meetingData.day, hour:meetingData.hour});
+		result.checked = true;
+		Details.update(result._id, result);
+		// console.log(result);
 	},
 	'click button[name="notAccept"]'(event, instance) {
 		Meetings.remove(instance.data.meeting._id);

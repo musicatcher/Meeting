@@ -123,3 +123,10 @@ header .hide-completed {
     padding-bottom: 5px;
   }
 }
+
+.meeting-item-tentative {
+  background: #CC2B2E;
+}
+.meeting-item-booked {
+  background: #3F8425;
+}
